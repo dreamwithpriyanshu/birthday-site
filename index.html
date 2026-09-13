@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Sampada! 🎂</title>
+  <meta name="description" content="A personalized birthday surprise for Sampada Srivastava — with love, memories, and wishes." />
+  <meta name="theme-color" content="#0A0A0C" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/bell-favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== CONFETTI CANVAS ========== -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ========== SCROLL HEALTH BAR ========== -->
+  <div class="health-bar-track"></div>
+  <div id="scroll-health-bar"></div>
+
+  <!-- ========== LOCK SCREEN ========== -->
+  <div id="lock-screen">
+    <div class="lock-bg-photo"></div>
+    <div class="lock-content">
+      <div class="lock-silhouette">
+        <img src="assets/photos/photo-01.jpg" alt="A blurred silhouette — the surprise awaits" />
+      </div>
+
+      <p class="lock-teaser">Something <span>special</span> is brewing...</p>
+      <p class="lock-hint">A little surprise is being prepared just for someone incredible. Sit tight — the magic unlocks soon!</p>
+
+      <div class="countdown-wrapper" id="countdown">
+        <div class="countdown-cartridge">
+          <span class="countdown-value" id="cd-days">00</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-cartridge">
+          <span class="countdown-value" id="cd-hours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-cartridge">
+          <span class="countdown-value" id="cd-minutes">00</span>
+          <span class="countdown-label">Mins</span>
+        </div>
+        <div class="countdown-cartridge">
+          <span class="countdown-value" id="cd-seconds">00</span>
+          <span class="countdown-label">Secs</span>
+        </div>
+      </div>
+
+      <div class="lock-bell">
+        <img src="assets/icons/bell-favicon.svg" alt="Bell icon" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MAIN SITE ========== -->
+  <main id="main-site">
+
+    <!-- === HERO === -->
+    <section id="hero" class="section">
+      <div class="hero-bg"></div>
+      <div class="hero-photo-container">
+        <img src="assets/photos/photo-01.jpg" alt="Sampada in a beautiful yellow sharara, smiling" />
+      </div>
+      <div class="hero-text">
+        <h1 class="hero-name">Happy Birthday, Sampada!</h1>
+        <p class="hero-subtitle">Here's to the most wonderful soul ✨</p>
+        <p class="hero-tagline">
+          A small digital world built just for you — because you deserve to know how truly special you are. Scroll down, and let the celebration begin.
+        </p>
+      </div>
+    </section>
+
+    <!-- === ABOUT HER === -->
+    <section id="about" class="section">
+      <p class="section-label">Player Select</p>
+      <h2 class="section-title">Meet Sampada</h2>
+
+      <div class="character-card">
+        <div class="character-header">
+          <div class="character-avatar">
+            <img src="assets/photos/photo-07.jpg" alt="Sampada portrait" />
+          </div>
+          <div class="character-info">
+            <h3>Sampada Srivastava</h3>
+            <span>★ Legendary Friend ★</span>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-emoji">📺</div>
+            <p class="stat-text"><strong>Favorite cartoon:</strong> Doraemon, obviously. The gadgets, the drama, the dorayaki — she gets it all.</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">🥟</div>
+            <p class="stat-text"><strong>Food weakness:</strong> The friend who'll pick momos over anything, any day. But honestly — she loves eating, period.</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">🖤</div>
+            <p class="stat-text"><strong>Color palette:</strong> Mostly black everything, but currently manifesting a yellow dress era. We love the growth.</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">👗</div>
+            <p class="stat-text"><strong>Style:</strong> Indian or Western depending on the mood — she pulls off both effortlessly.</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">💇</div>
+            <p class="stat-text"><strong>Hair dreams:</strong> Long, wavy, main-character hair. She's manifesting and honestly, it's working.</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">🎵</div>
+            <p class="stat-text"><strong>Music taste:</strong> Soft, peaceful, love-type songs — the kind that make you stare out a window and feel things.</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-emoji">🎬</div>
+            <p class="stat-text"><strong>Movie mood:</strong> No fixed genre — rom-com, thriller, all sorts. But she has a soft spot for dreamy love stories.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === GALLERY === -->
+    <section id="gallery" class="section">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">Moments Worth Keeping</h2>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Photos arranged for visual variety — mixing portrait/landscape feel -->
+        <div class="gallery-item" data-index="0">
+          <img src="assets/photos/photo-01.jpg" alt="Sampada in yellow sharara with pink wall" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="1">
+          <img src="assets/photos/photo-09.jpg" alt="Sampada in green floral dress among plants" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="2">
+          <img src="assets/photos/photo-04.jpg" alt="Sampada in teal suit at a doorway" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="3">
+          <img src="assets/photos/photo-02.jpg" alt="Sampada selfie in black sparkly top" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="4">
+          <img src="assets/photos/photo-07.jpg" alt="Sampada in yellow gown at poolside event" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="5">
+          <img src="assets/photos/photo-05.jpg" alt="Sampada in green suit with gold earrings" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="6">
+          <img src="assets/photos/photo-08.jpg" alt="Sampada in teal-blue suit, seated with roses" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="7">
+          <img src="assets/photos/photo-03.jpg" alt="Sampada in red jacket at a green field" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="8">
+          <img src="assets/photos/photo-12.jpg" alt="Sampada in olive dress near mountains" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="9">
+          <img src="assets/photos/photo-10.jpg" alt="Sampada in black velvet gown" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="10">
+          <img src="assets/photos/photo-14.jpg" alt="Sampada at a café, casual and candid" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="11">
+          <img src="assets/photos/photo-11.jpg" alt="Sampada in red jacket, green field portrait" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="12">
+          <img src="assets/photos/photo-13.jpg" alt="Sampada in sparkly black top, selfie" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="13">
+          <img src="assets/photos/photo-15.jpg" alt="Sampada in black velvet gown, full portrait" loading="lazy" />
+        </div>
+        <div class="gallery-item" data-index="14">
+          <img src="assets/photos/photo-06.jpg" alt="Sampada in yellow outfit, candid sitting pose" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- === LIGHTBOX === -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="Photo viewer" aria-hidden="true">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close photo viewer">✕</button>
+      <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous photo">‹</button>
+      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+      <button class="lightbox-next" id="lightbox-next" aria-label="Next photo">›</button>
+    </div>
+
+    <!-- === LETTER === -->
+    <section id="letter" class="section">
+      <p class="section-label">A Letter For You</p>
+      <h2 class="section-title">From My Heart to Yours</h2>
+
+      <div class="letter-card">
+        <p class="letter-greeting">Dear Sampada,</p>
+        <div class="letter-body">
+          <p>Thank you for being in my life. As a friend, you have always helped me — whenever I talk to you, I feel really good. You are truly a gem, and I wish you a very happy birthday from the bottom of my heart. May God bless you and help you achieve whatever you want.</p>
+
+          <p>This is just a small initiative from my side, since I can't gift you something physical — so please take this as my gift to you. You are smart, beautiful, and your words are never harsh to me — they are sweet, and they always will be.</p>
+
+          <p>You know, there aren't many people who make you feel comfortable being yourself. But with you, it's always easy — always warm. That's rare, and I never take it for granted. Keep being the amazing person you are, Sampada. The world is lucky to have you.</p>
+        </div>
+        <p class="letter-signature">— A friend who cares ❤️</p>
+      </div>
+    </section>
+
+    <!-- === GIFT ROOM === -->
+    <section id="gift-room" class="section">
+      <p class="section-label">Gift Room</p>
+      <h2 class="section-title">Something Special Inside</h2>
+
+      <div class="gift-box-wrapper">
+        <div class="gift-box" id="gift-box" role="button" tabindex="0" aria-label="Click to open your gift">
+          <span class="gift-box-icon" id="gift-box-icon">🎁</span>
+          <span class="gift-box-text">Tap to unwrap your surprise!</span>
+        </div>
+      </div>
+
+      <div class="gift-content" id="gift-content">
+        <div class="gift-quotes">
+          <div class="gift-quote-card">
+            "Some people make the world more beautiful just by being in it. You're one of those rare ones, Sampada."
+          </div>
+          <div class="gift-quote-card">
+            "You don't just light up a room — you light up the whole conversation. Never change that energy."
+          </div>
+          <div class="gift-quote-card">
+            <!-- Hidden dorayaki easter egg 🍩 (dorayaki!) -->
+            "Life's sweetest moments are the ones shared with friends like you — sweeter than even a plate of dorayaki 🍩"
+          </div>
+        </div>
+
+        <div class="gift-collage">
+          <img src="assets/photos/photo-06.jpg" alt="Sampada in yellow, candid pose" />
+          <img src="assets/photos/photo-08.jpg" alt="Sampada seated with roses" />
+        </div>
+
+        <p class="gift-note">
+          You deserve the world and then some. This little website is my way of saying —
+          you matter, you're appreciated, and you'll always have a friend who cares. 🌟
+        </p>
+      </div>
+    </section>
+
+    <!-- === FUTURE WISHES === -->
+    <section id="wishes" class="section">
+      <p class="section-label">The Road Ahead</p>
+      <h2 class="section-title">Wishes for Your Future</h2>
+
+      <div class="wishes-grid">
+        <div class="wish-card">
+          <div class="wish-icon">🚀</div>
+          <h3 class="wish-title">Career</h3>
+          <p class="wish-text">May you ace every interview, crush every goal, and build a career that excites you every single morning.</p>
+        </div>
+        <div class="wish-card">
+          <div class="wish-icon">😊</div>
+          <h3 class="wish-title">Happiness</h3>
+          <p class="wish-text">May your days be filled with belly laughs, warm chai, and the kind of peace that makes everything feel okay.</p>
+        </div>
+        <div class="wish-card">
+          <div class="wish-icon">🤝</div>
+          <h3 class="wish-title">Friendships</h3>
+          <p class="wish-text">May you always be surrounded by people who see how incredible you are — and never let you forget it.</p>
+        </div>
+        <div class="wish-card">
+          <div class="wish-icon">✨</div>
+          <h3 class="wish-title">Adventures</h3>
+          <p class="wish-text">May life surprise you with beautiful places, unforgettable moments, and stories you'll tell for years.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === FOOTER === -->
+    <footer id="footer">
+      <img class="footer-bell" src="assets/icons/bell-favicon.svg" alt="" aria-hidden="true" />
+      <p class="footer-text">Made with <span>❤️</span> by a friend who cares</p>
+    </footer>
+
+  </main>
+
+  <!-- ========== MUSIC PLAYER ========== -->
+  <div id="music-player">
+    <div class="player-inner">
+      <button class="player-play-btn" id="player-play" aria-label="Play or pause music">▶</button>
+      <div class="player-info">
+        <p class="player-track-name" id="player-track-name">🎵 Tap play to start her songs</p>
+        <div class="player-progress-bar" id="player-progress-bar">
+          <div class="player-progress-fill" id="player-progress-fill"></div>
+        </div>
+      </div>
+      <button class="player-skip-btn" id="player-skip" aria-label="Next track">⏭</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
