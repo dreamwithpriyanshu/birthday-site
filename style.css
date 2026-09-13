@@ -1,29 +1,25 @@
-/* ============================================================
-   HAPPY BIRTHDAY SAMPADA — Design System & Styles
-   ============================================================ */
-
 /* --- Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Press+Start+2P&family=Caveat:wght@500;600;700&display=swap');
 
 /* --- CSS Custom Properties --- */
 :root {
   /* Palette */
-  --black:       #0A0A0C;
-  --yellow:      #F4C531;
-  --yellow-dim:  #d4a820;
+  --black: #0A0A0C;
+  --yellow: #F4C531;
+  --yellow-dim: #d4a820;
   --yellow-glow: rgba(244, 197, 49, 0.25);
-  --off-white:   #FFF7DE;
-  --red-orange:  #E8412C;
-  --blue-muted:  #3E7CB1;
-  --surface:     #1C1C22;
-  --surface-2:   #252530;
-  --text-dim:    #9999A8;
+  --off-white: #FFF7DE;
+  --red-orange: #E8412C;
+  --blue-muted: #3E7CB1;
+  --surface: #1C1C22;
+  --surface-2: #252530;
+  --text-dim: #9999A8;
 
   /* Type Scale */
   --font-display: 'Fredoka', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-pixel:   'Press Start 2P', monospace;
-  --font-hand:    'Caveat', cursive;
+  --font-body: 'Inter', sans-serif;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-hand: 'Caveat', cursive;
 
   /* Spacing */
   --space-xs: 0.5rem;
@@ -45,7 +41,9 @@
 }
 
 /* --- Reset & Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -79,7 +77,9 @@ a {
   transition: color 0.2s var(--ease-out);
 }
 
-a:hover { color: var(--off-white); }
+a:hover {
+  color: var(--off-white);
+}
 
 /* Focus states */
 :focus-visible {
@@ -256,9 +256,19 @@ a:hover { color: var(--off-white); }
 }
 
 @keyframes bellSwing {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(10deg); }
-  75% { transform: rotate(-10deg); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
 }
 
 /* ============================================================
@@ -335,7 +345,7 @@ a:hover { color: var(--off-white); }
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center top, var(--yellow-glow) 0%, transparent 60%),
-              radial-gradient(ellipse at center bottom, rgba(62, 124, 177, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at center bottom, rgba(62, 124, 177, 0.1) 0%, transparent 50%);
   z-index: 1;
 }
 
@@ -609,11 +619,30 @@ a:hover { color: var(--off-white); }
   transform: scale(1.1);
 }
 
-.lightbox-close { top: 24px; right: 24px; }
-.lightbox-prev { left: 24px; top: 50%; transform: translateY(-50%); }
-.lightbox-next { right: 24px; top: 50%; transform: translateY(-50%); }
-.lightbox-prev:hover { transform: translateY(-50%) scale(1.1); }
-.lightbox-next:hover { transform: translateY(-50%) scale(1.1); }
+.lightbox-close {
+  top: 24px;
+  right: 24px;
+}
+
+.lightbox-prev {
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-prev:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-next:hover {
+  transform: translateY(-50%) scale(1.1);
+}
 
 /* ============================================================
    LETTER SECTION
@@ -711,8 +740,15 @@ a:hover { color: var(--off-white); }
 }
 
 @keyframes giftBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .gift-content {
@@ -1006,15 +1042,25 @@ a:hover { color: var(--off-white); }
     grid-template-columns: 1fr;
   }
 
-  .lightbox-prev, .lightbox-next {
+  .lightbox-prev,
+  .lightbox-next {
     width: 40px;
     height: 40px;
     font-size: 1rem;
   }
 
-  .lightbox-prev { left: 12px; }
-  .lightbox-next { right: 12px; }
-  .lightbox-close { top: 12px; right: 12px; }
+  .lightbox-prev {
+    left: 12px;
+  }
+
+  .lightbox-next {
+    right: 12px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1036,7 +1082,10 @@ a:hover { color: var(--off-white); }
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

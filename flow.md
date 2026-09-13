@@ -171,6 +171,24 @@ All in ~60 lines of JS. No Lightbox2, no GLightbox, no Fancybox — keeps the pr
 
 ---
 
+### Decision 18: Section-Based Autoplay Music
+**User Request:** Songs should auto-start on unlock. Specific songs tied to specific sections:
+- Happy Birthday → Hero (first screen on unlock)
+- Gilehriyaan → Gallery (memories)
+- Kaise Mujhe Tum Mil Gayi → Letter section
+- Woh Din → Future Wishes
+
+**Decision:** IntersectionObserver-based section-song switching with autoplay
+**Reasoning:**
+- On unlock (or load if already past date): auto-play "Happy Birthday" immediately
+- As user scrolls, IntersectionObserver watches 4 key sections (hero, gallery, letter, wishes)
+- When 40% of a mapped section enters the viewport, the track switches automatically
+- If user manually pauses, section switching respects that (won't force-resume)
+- If browser blocks autoplay (common on mobile), shows "🎵 Tap ▶ to play" prompt and starts on first user interaction
+- Manual play/pause/skip still works alongside the auto-switching
+
+---
+
 ## Summary of Files Created
 
 | File | Purpose |
@@ -180,4 +198,4 @@ All in ~60 lines of JS. No Lightbox2, no GLightbox, no Fancybox — keeps the pr
 | `script.js` | Countdown, confetti, lightbox, music player, gift box, scroll bar |
 | `assets/icons/bell-favicon.svg` | Doraemon bell-inspired favicon |
 | `assets/photos/photo-01.jpg` … `photo-15.jpg` | 15 renamed photos |
-| `assets/audio/` | Empty — awaiting user's mp3 files |
+| `assets/audio/` | 4 songs |

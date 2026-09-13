@@ -1,46 +1,53 @@
-/* ============================================================
-   HAPPY BIRTHDAY SAMPADA — Main Script
-   ============================================================ */
 
 (function () {
   'use strict';
 
   // --- CONFIG ---
-  const UNLOCK_DATE = new Date('2026-09-15T00:00:00+05:30');
+  const UNLOCK_DATE = new Date('2026-09-13T00:00:00+05:30');
   const SONGS = [
     { title: 'Kaise Mujhe Tum Mil Gayi', src: 'assets/audio/kaise-mujhe-tum-mil-gayi.mp3' },
-    { title: 'Happy Birthday',           src: 'assets/audio/happy-birthday.mp3' },
-    { title: 'Woh Din',                  src: 'assets/audio/woh-din.mp3' },
-    { title: 'Gilehriyaan',              src: 'assets/audio/gilehriyaan.mp3' },
+    { title: 'Happy Birthday', src: 'assets/audio/happy-birthday.mp3' },
+    { title: 'Woh Din', src: 'assets/audio/woh-din.mp3' },
+    { title: 'Gilehriyaan', src: 'assets/audio/gilehriyaan.mp3' },
   ];
+
+  // Which song plays when you scroll to each section
+  // Index matches the SONGS array above
+  const SECTION_SONGS = {
+    'hero': 1,     // Happy Birthday
+    'gallery': 3,  // Gilehriyaan
+    'letter': 0,   // Kaise Mujhe Tum Mil Gayi
+    'wishes': 2,   // Woh Din
+  };
+
   const GALLERY_SRCS = [];
 
   // --- DOM REFS ---
-  const lockScreen    = document.getElementById('lock-screen');
-  const mainSite      = document.getElementById('main-site');
+  const lockScreen = document.getElementById('lock-screen');
+  const mainSite = document.getElementById('main-site');
   const confettiCanvas = document.getElementById('confetti-canvas');
 
-  const cdDays    = document.getElementById('cd-days');
-  const cdHours   = document.getElementById('cd-hours');
+  const cdDays = document.getElementById('cd-days');
+  const cdHours = document.getElementById('cd-hours');
   const cdMinutes = document.getElementById('cd-minutes');
   const cdSeconds = document.getElementById('cd-seconds');
 
-  const lightbox     = document.getElementById('lightbox');
-  const lightboxImg  = document.getElementById('lightbox-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
   const lightboxPrev = document.getElementById('lightbox-prev');
   const lightboxNext = document.getElementById('lightbox-next');
 
-  const giftBox     = document.getElementById('gift-box');
+  const giftBox = document.getElementById('gift-box');
   const giftBoxIcon = document.getElementById('gift-box-icon');
   const giftContent = document.getElementById('gift-content');
 
-  const musicPlayer      = document.getElementById('music-player');
-  const playerPlayBtn    = document.getElementById('player-play');
-  const playerTrackName  = document.getElementById('player-track-name');
+  const musicPlayer = document.getElementById('music-player');
+  const playerPlayBtn = document.getElementById('player-play');
+  const playerTrackName = document.getElementById('player-track-name');
   const playerProgressBar = document.getElementById('player-progress-bar');
   const playerProgressFill = document.getElementById('player-progress-fill');
-  const playerSkipBtn    = document.getElementById('player-skip');
+  const playerSkipBtn = document.getElementById('player-skip');
 
   const scrollHealthBar = document.getElementById('scroll-health-bar');
 
@@ -51,6 +58,7 @@
   let audio = null;
   let isPlaying = false;
   let giftOpened = false;
+  let userPaused = false;
 
   // Collect gallery image sources
   document.querySelectorAll('#gallery-grid .gallery-item img').forEach(img => {
@@ -69,13 +77,13 @@
       return;
     }
 
-    const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    cdDays.textContent    = String(days).padStart(2, '0');
-    cdHours.textContent   = String(hours).padStart(2, '0');
+    cdDays.textContent = String(days).padStart(2, '0');
+    cdHours.textContent = String(hours).padStart(2, '0');
     cdMinutes.textContent = String(minutes).padStart(2, '0');
     cdSeconds.textContent = String(seconds).padStart(2, '0');
   }
@@ -95,8 +103,11 @@
     // Remove lock screen from DOM after animation
     setTimeout(() => {
       lockScreen.style.display = 'none';
-      // Show music player
       musicPlayer.classList.add('visible');
+      // Auto-start Happy Birthday
+      startMusic(1);
+      // Watch sections for song switching
+      initSectionObserver();
     }, 1200);
 
     // Stop countdown interval
@@ -113,10 +124,16 @@
       lockScreen.style.display = 'none';
       mainSite.classList.add('revealed');
       musicPlayer.classList.add('visible');
+      isUnlocked = true;
 
       // Still play a welcome confetti burst
       setTimeout(launchConfetti, 500);
-      isUnlocked = true;
+
+      // Auto-start Happy Birthday + section observer
+      setTimeout(() => {
+        startMusic(1);
+        initSectionObserver();
+      }, 800);
     } else {
       // Start countdown
       updateCountdown();
@@ -291,7 +308,7 @@
       });
       audio.addEventListener('timeupdate', updateProgress);
       audio.addEventListener('error', () => {
-        playerTrackName.textContent = '⚠️ Audio file not found — add mp3s to assets/audio/';
+        playerTrackName.textContent = '⚠️ Could not load: ' + SONGS[currentTrack].title;
       });
     }
   }
@@ -304,6 +321,32 @@
     playerProgressFill.style.width = '0%';
   }
 
+  // Called on unlock — tries to auto-play, falls back to tap prompt
+  function startMusic(index) {
+    loadTrack(index);
+    audio.play().then(() => {
+      isPlaying = true;
+      playerPlayBtn.textContent = '⏸';
+    }).catch(() => {
+      // Browser blocked autoplay — prompt user
+      playerTrackName.textContent = '🎵 Tap ▶ to play: ' + SONGS[index].title;
+      // Start playing on first tap/click anywhere
+      function onFirstInteraction() {
+        if (!isPlaying && !userPaused) {
+          audio.play().then(() => {
+            isPlaying = true;
+            playerPlayBtn.textContent = '⏸';
+            playerTrackName.textContent = SONGS[currentTrack].title;
+          }).catch(() => {});
+        }
+        document.removeEventListener('click', onFirstInteraction);
+        document.removeEventListener('touchstart', onFirstInteraction);
+      }
+      document.addEventListener('click', onFirstInteraction);
+      document.addEventListener('touchstart', onFirstInteraction);
+    });
+  }
+
   function playPause() {
     initAudio();
     if (!audio.src || audio.src === window.location.href) {
@@ -312,13 +355,15 @@
     if (isPlaying) {
       audio.pause();
       isPlaying = false;
+      userPaused = true;
       playerPlayBtn.textContent = '▶';
     } else {
+      userPaused = false;
       audio.play().then(() => {
         isPlaying = true;
         playerPlayBtn.textContent = '⏸';
       }).catch(() => {
-        playerTrackName.textContent = '⚠️ Audio file not found — add mp3s to assets/audio/';
+        playerTrackName.textContent = '⚠️ Could not load: ' + SONGS[currentTrack].title;
       });
     }
   }
@@ -327,8 +372,21 @@
     currentTrack = (currentTrack + 1) % SONGS.length;
     loadTrack(currentTrack);
     if (isPlaying) {
-      audio.play().catch(() => {});
+      audio.play().then(() => {
+        playerPlayBtn.textContent = '⏸';
+      }).catch(() => {});
     }
+  }
+
+  // Switch track when scrolling to a mapped section
+  function switchToSectionTrack(index) {
+    if (currentTrack === index) return;
+    if (userPaused) return; // don't force music if user paused
+    loadTrack(index);
+    audio.play().then(() => {
+      isPlaying = true;
+      playerPlayBtn.textContent = '⏸';
+    }).catch(() => {});
   }
 
   function updateProgress() {
@@ -336,6 +394,22 @@
       const pct = (audio.currentTime / audio.duration) * 100;
       playerProgressFill.style.width = pct + '%';
     }
+  }
+
+  // --- Section Observer: auto-switch songs as you scroll ---
+  function initSectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && SECTION_SONGS.hasOwnProperty(entry.target.id)) {
+          switchToSectionTrack(SECTION_SONGS[entry.target.id]);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    Object.keys(SECTION_SONGS).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
   }
 
   // Click on progress bar to seek
