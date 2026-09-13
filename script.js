@@ -3,7 +3,7 @@
   'use strict';
 
   // --- CONFIG ---
-  const UNLOCK_DATE = new Date('2026-09-15T00:00:00+05:30');
+  const UNLOCK_DATE = new Date('2026-09-17T00:00:00+05:30');
   const SONGS = [
     { title: 'Kaise Mujhe Tum Mil Gayi', src: 'assets/audio/kaise-mujhe-tum-mil-gayi.mp3' },
     { title: 'Happy Birthday', src: 'assets/audio/happy-birthday.mp3' },
