@@ -3,7 +3,7 @@
   'use strict';
 
   // --- CONFIG ---
-  const UNLOCK_DATE = new Date('2026-09-13T00:00:00+05:30');
+  const UNLOCK_DATE = new Date('2026-09-15T00:00:00+05:30');
   const SONGS = [
     { title: 'Kaise Mujhe Tum Mil Gayi', src: 'assets/audio/kaise-mujhe-tum-mil-gayi.mp3' },
     { title: 'Happy Birthday', src: 'assets/audio/happy-birthday.mp3' },
@@ -337,7 +337,7 @@
             isPlaying = true;
             playerPlayBtn.textContent = '⏸';
             playerTrackName.textContent = SONGS[currentTrack].title;
-          }).catch(() => {});
+          }).catch(() => { });
         }
         document.removeEventListener('click', onFirstInteraction);
         document.removeEventListener('touchstart', onFirstInteraction);
@@ -374,7 +374,7 @@
     if (isPlaying) {
       audio.play().then(() => {
         playerPlayBtn.textContent = '⏸';
-      }).catch(() => {});
+      }).catch(() => { });
     }
   }
 
@@ -386,7 +386,7 @@
     audio.play().then(() => {
       isPlaying = true;
       playerPlayBtn.textContent = '⏸';
-    }).catch(() => {});
+    }).catch(() => { });
   }
 
   function updateProgress() {
